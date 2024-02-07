@@ -70,3 +70,26 @@ Nova função (nome da função é apenas sugestão):
         remover item da lista de cursos utilizando a função "removerItem" (criada no Exercício 3). Dessa forma o curso/professores será movido para a nova lista.
 
 ========================================================================================================================
+
+Vamos adicionar um pouco de Orientação a Objetos em nosso projeto
+
+    Crie uma classe de curso com ao menos:
+        Atributos:
+            Nome
+            Descrição
+            Professores
+            Carga horária
+        Métodos:
+            Progresso
+            Notas
+            Participação
+        Obs.: Os métodos podem conter apenas textos que imprimam no console
+    Crie uma classe de professor com ao menos:
+        Atributos:
+            Nome
+            Especialidade
+        Métodos:
+            Ensinar
+        Obs.: Os métodos podem conter apenas textos que imprimam no console
+
+========================================================================================================================
