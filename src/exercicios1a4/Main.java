@@ -1,3 +1,5 @@
+package exercicios1a4;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -59,20 +61,19 @@ public class Main {
 
     private static int quantidadeVezesOperacao(Scanner entrada) {
         System.out.print("Digite quantas vezes deseja executar a operação: ");
-        return getIndice(entrada);
+        return getNumero(entrada);
     }
 
     private static int pedirIndiceCurso(Scanner entrada, List<Curso> listaCursos) {
         listarCursos(listaCursos);
 
         System.out.print("Digite o índice do curso escolhido: ");
-        int indice = getIndice(entrada);
+        int indice = getNumero(entrada);
 
         if (indice > listaCursos.size() - 1 || indice < 0) { // verifica se o índice ultrapassa o tamanho da lista ou for negativo
             System.out.println("\nÍndice inválido. Tente novamente!");
             indice = pedirIndiceCurso(entrada, listaCursos);
         }
-
         return indice;
     }
 
@@ -80,7 +81,7 @@ public class Main {
         listarProfessores(listaProfessores);
 
         System.out.print("Digite o índice do professor escolhido: ");
-        int indice = getIndice(entrada);
+        int indice = getNumero(entrada);
 
         if (indice > listaProfessores.size() - 1 || indice < 0) { // verifica se o índice ultrapassa o tamanho da lista ou for negativo
             System.out.println("\nÍndice inválido. Tente novamente!");
@@ -89,7 +90,7 @@ public class Main {
         return indice;
     }
 
-    private static int getIndice(Scanner entrada) {
+    private static int getNumero(Scanner entrada) {
         int indice = entrada.nextInt();
         entrada.nextLine(); // consumir o \n
         return indice;
@@ -108,7 +109,7 @@ public class Main {
             int indice = pedirIndiceCurso(entrada, listaCursos);
             String nomeCurso = listaCursos.get(indice).getNomeCurso();
             removerCurso(listaCursos, indice);
-            System.out.println("Curso " + nomeCurso + " removido da lista de cursos.");
+            System.out.println("\nCurso " + nomeCurso + " removido da lista de cursos.");
         } else {
             System.out.println("\nNenhum curso encontrado para ser removido.");
         }
@@ -119,7 +120,7 @@ public class Main {
             int indice = pedirIndiceProfessor(entrada, listaProfessores);
             String nome = listaProfessores.get(indice).getNome();
             removerProfessor(listaProfessores, indice);
-            System.out.println("Professor " + nome + " removido com sucesso!");
+            System.out.println("\nProfessor " + nome + " removido com sucesso!");
         } else {
             System.out.println("\nNenhum professor encontrado para ser removido.");
         }
@@ -142,11 +143,30 @@ public class Main {
         if (listaCursosConcluidos.isEmpty()) {
             System.out.println("\nNenhum curso concluído.");
         } else {
-            System.out.println("\nLista de cursos concluídos: ");
+            System.out.println("\nLista de Cursos Concluídos: ");
             for (int i = 0; i < listaCursosConcluidos.size(); i++) {
                 System.out.println(i + " - " + listaCursosConcluidos.get(i).getNomeCurso());
             }
         }
+    }
+    private static int getOpcaoMenu(Scanner entrada) {
+        System.out.println("\n+------------------------------+");
+        System.out.println("|             MENU             |");
+        System.out.println("+------------------------------+");
+        System.out.println("| (1) - Listar Cursos          |");
+        System.out.println("| (2) - Listar Professores     |");
+        System.out.println("| (3) - Cadastrar Cursos       |");
+        System.out.println("| (4) - Cadastrar Professores  |");
+        System.out.println("| (5) - Remover Curso          |");
+        System.out.println("| (6) - Remover Professor      |");
+        System.out.println("| (7) - Marcar como Concluído  |");
+        System.out.println("| (8) - Listar Concluídos      |");
+        System.out.println("+------------------------------+");
+        System.out.println("| (0) - Sair                   |");
+        System.out.println("+------------------------------+");
+        System.out.print("Digite o número da opção desejada: ");
+
+        return getNumero(entrada);
     }
 
     public static void main(String[] args) {
@@ -156,62 +176,46 @@ public class Main {
         List<Professor> listaProfessores = new ArrayList<>();
 
         while (true) {
-            System.out.println("\n+------------------------------+");
-            System.out.println("|             MENU             |");
-            System.out.println("+------------------------------+");
-            System.out.println("| (1) - Listar Cursos          |");
-            System.out.println("| (2) - Listar Professores     |");
-            System.out.println("| (3) - Cadastrar Cursos       |");
-            System.out.println("| (4) - Cadastrar Professores  |");
-            System.out.println("| (5) - Remover Curso          |");
-            System.out.println("| (6) - Remover Professor      |");
-            System.out.println("| (7) - Marcar como Concluído  |");
-            System.out.println("| (8) - Listar Concluídos      |");
-            System.out.println("+------------------------------+");
-            System.out.println("| (0) - Sair                   |");
-            System.out.println("+------------------------------+");
-            System.out.print("Digite o número da opção desejada: ");
-
-            int opcao = getIndice(scan);
+            int opcao = getOpcaoMenu(scan);
 
             switch (opcao) {
-                case 1:
+                case 1: // Listar Cursos
                     listarCursos(listaCursos);
                     break;
-                case 2:
+                case 2: // Listar Professores
                     listarProfessores(listaProfessores);
                     break;
-                case 3:
+                case 3: // Cadastrar Cursos
                     int quantosCursos = quantidadeVezesOperacao(scan);
                     for (int i = 0; i < quantosCursos; i++) {
                         cadastrarCurso(scan, listaCursos);
                     }
                     listarNovosCursos(listaCursos, quantosCursos);
                     break;
-                case 4:
+                case 4: // Cadastrar Professores
                     int quantosProfessores = quantidadeVezesOperacao(scan);
                     for (int i = 0; i < quantosProfessores; i++) {
                         cadastrarProfessor(scan, listaProfessores);
                     }
                     listarNovosProfessores(listaProfessores, quantosProfessores);
                     break;
-                case 5:
+                case 5: // Remover Cursos
                     removerItemListaCursos(scan, listaCursos);
                     break;
-                case 6:
+                case 6: // Remover Professores
                     removerItemListaProfessores(scan, listaProfessores);
                     break;
-                case 7:
+                case 7: // Marcar como Concluído
                     marcarComoConcluido(scan, listaCursos, listaCursosConcluidos);
                     break;
-                case 8:
+                case 8: // Listar Cursos Concluídos
                     listarCursosConcluidos(listaCursosConcluidos);
                     break;
-                case 0:
+                case 0: // Sair
                     listarCursos(listaCursos);
                     listarProfessores(listaProfessores);
                     listarCursosConcluidos(listaCursosConcluidos);
-                    System.out.println("\nSaindo...\n");
+                    System.out.println("\nPrograma encerrado.\n");
                     scan.close();
                     return;
                 default:

@@ -1,3 +1,5 @@
+package exercicios1a4;
+
 public class Professor {
 
     private String nome;
